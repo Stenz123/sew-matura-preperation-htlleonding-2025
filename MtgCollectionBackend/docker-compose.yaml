@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: mtg-postgres
+    environment:
+      - POSTGRES_DB=mtg
+      - POSTGRES_PASSWORD=mtg
+      - POSTGRES_USER=mtg
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/volume:/data/db
+volumes:
+  mtg:

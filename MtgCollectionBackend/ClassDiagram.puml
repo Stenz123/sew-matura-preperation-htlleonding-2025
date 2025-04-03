@@ -1,0 +1,40 @@
+@startuml
+class Player {
+  + id : Long
+  + name : String
+}
+
+class Deck {
+  + id : Long
+  + name : String
+}
+
+class Card {
+  + id : Long
+  + name : String
+  + type : String
+  + mana_cost : String
+  + rarity : String
+}
+
+class deck_card {
+  + quantity : Int
+}
+
+class Collection {
+  + id : Long
+  + name : String
+}
+
+class collection_card {
+}
+
+Player "1" -- "*" Deck : besitzt
+Player "1" -- "*" Collection : besitzt
+
+Deck "*" -- "*" Card : enthält
+(Deck, Card) ... deck_card
+
+Collection "*" -- "*" Card : enthält
+(Collection, Card) ... collection_card
+@enduml

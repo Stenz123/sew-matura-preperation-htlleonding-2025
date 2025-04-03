@@ -31,9 +31,10 @@ public class DeckRepository implements PanacheRepository<Deck> {
         int landCount = (int) deckCards.stream().filter(deckCardDto -> deckCardDto.card().type == CardType.LAND).mapToDouble(DeckCardDto::quantity).sum();
 
         return new DeckDto(
+                deck.id.intValue(),
                 deck.player.name,
                 deck.name,
-                deck.deckCards.stream().map(deckCard -> deckCard.deckCardId.card).toList(),
+                deck.deckCards.stream().map(deckCard ->new DeckCardDto(deckCard.quantity, deckCard.deckCardId.card)).toList(),
                 numberOfCards,
                 averageConvertedManaCost,
                 totalPrice,

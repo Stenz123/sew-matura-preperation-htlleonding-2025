@@ -1,0 +1,20 @@
+@if (player === undefined){
+  <h1>Loading...</h1>
+} @else {
+<h1>{{this.player?.id}}: {{this.player?.playerName}}</h1>
+<h2>Collection Value: {{this.player?.totalCollectionPrice}}</h2>
+<h2>Collection:</h2>
+<li>
+  @for (collection of player!.collections; track player.collections){
+      <ul>{{collection.id}}: {{collection.name}}</ul>
+  }
+</li>
+
+
+<h2>Decks:</h2>
+<li>
+  @for (deck of player!.decks; track player.decks){
+    <app-deck [deckId]="deck.id"></app-deck>
+  }
+</li>
+}

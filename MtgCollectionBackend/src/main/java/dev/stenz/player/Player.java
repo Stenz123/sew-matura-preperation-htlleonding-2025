@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Player extends PanacheEntity {
     public String name;
-
+    public int wins;
 
     @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties({"player", "collectionCards"})
@@ -23,4 +23,11 @@ public class Player extends PanacheEntity {
     @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties({"player", "deckCards"})
     List<Deck> decks;
+
+    public Deck randomDeck() {
+        if (decks == null || decks.isEmpty()) {
+            return null;
+        }
+        return decks.get((int) (Math.random() * decks.size()));
+    }
 }

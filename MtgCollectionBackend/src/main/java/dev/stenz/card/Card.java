@@ -17,6 +17,8 @@ public class Card extends PanacheEntity {
     @Enumerated(EnumType.STRING)
     public Rarity rarity;
 
+    public String uri;
+
     @Column(name = "converted_mana_cost")
     public int convertedManaCost;
 

@@ -7,6 +7,7 @@ import dev.stenz.deck.Deck;
 import java.util.List;
 
 public record PlayerStatDto (
+        int id,
         String playerName,
         Card mostExpensiveCard,
         double totalCollectionPrice,

@@ -8,6 +8,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Path("/api/deck")
@@ -26,6 +27,8 @@ public class DeckResource {
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Deck> allDecks() {
-        return Deck.findAll().list();
+        List<Deck> decks = Deck.findAll().list();
+        decks.sort(Comparator.comparing(deck -> deck.name));
+        return decks;
     }
 }

@@ -1,10 +1,11 @@
 package dev.stenz.deck;
 
-import dev.stenz.card.CardType;
+import dev.stenz.card.*;
 import dev.stenz.dto.DeckCardDto;
 import dev.stenz.dto.DeckDto;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;

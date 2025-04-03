@@ -48,4 +48,18 @@ public class DeckCardRepository {
             throw new NotFoundException("DeckCard not found");
         }
     }
+
+    @Transactional
+    public void addCardToDeck(int deckId, int cardId) {
+        Deck deck = entityManager.find(Deck.class, (long) deckId);
+        if (deck == null) throw new NotFoundException("Deck not found");
+        Card card = entityManager.find(Card.class, (long) cardId);
+        if (card == null) throw new NotFoundException("Card not found");
+        DeckCard deckCard = new DeckCard();
+        deckCard.deckCardId = new DeckCardId();
+        deckCard.deckCardId.deck = deck;
+        deckCard.deckCardId.card = card;
+        deckCard.quantity = 1;
+        entityManager.persist(deckCard);
+    }
 }

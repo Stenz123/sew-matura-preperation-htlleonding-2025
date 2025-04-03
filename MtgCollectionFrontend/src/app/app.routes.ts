@@ -3,6 +3,7 @@ import {HomeComponent} from './home/home.component';
 import {PlayerDetailComponent} from './player-detail/player-detail.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {PlayerssComponent} from './playerss/playerss.component';
+import {NewCardComponent} from './new-card/new-card.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,12 @@ export const routes: Routes = [
     path: 'player/:id',
     component: PlayerDetailComponent,
     title: 'Player Detail'
+  },
+  {
+
+    path: 'newCard',
+    component: NewCardComponent,
+    title: 'New Card'
   },
   {
     path: '**',

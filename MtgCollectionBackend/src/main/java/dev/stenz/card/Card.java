@@ -22,7 +22,7 @@ public class Card extends PanacheEntity {
     @Column(name = "converted_mana_cost")
     public int convertedManaCost;
 
-    public int price;
+    public double price;
 
     @OneToMany(mappedBy = "collectionCardId.card")
     @JsonIgnore
@@ -31,4 +31,26 @@ public class Card extends PanacheEntity {
     @OneToMany(mappedBy = "deckCardId.card")
     @JsonIgnore
     public List<DeckCard> deckCards;
+
+    public static boolean isValidManaCost(String manaCost) {
+        return manaCost.matches("^(?:\\d+|[WUBRGXCS]|[WUBRG]/[WUBRG]|2/[WUBRG]|[WUBRG]/P)+$");
+    }
+    public static int manaCostToConvertedManacost(String manaCost) {
+        if (manaCost == null || manaCost.isEmpty()) {
+            return 0;
+        }
+        int index = manaCost.length()-1;
+        int res = 0;
+        while (index >= 0) {
+            char c = manaCost.charAt(index);
+            if (Character.isAlphabetic(c)) {
+                res++;
+                index--;
+            } else {
+                res += Integer.parseInt(manaCost.substring(0, index+1));
+                break;
+            }
+        }
+        return res;
+    }
 }

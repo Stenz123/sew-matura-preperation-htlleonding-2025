@@ -1,0 +1,66 @@
+<form [formGroup]="cardForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="new-card">
+    <mat-card-header>
+      <mat-card-title>Create a New Card</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <!-- Name -->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Card Name" formControlName="name">
+        @if (cardForm.controls['name'].hasError('required')) {
+          <mat-error>Name is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Card Type -->
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Card Type" formControlName="cardType">
+          @for (type of cardTypes; track type) {
+            <mat-option [value]="type">{{ type }}</mat-option>
+          }
+        </mat-select>
+        @if (cardForm.controls['cardType'].hasError('required')) {
+          <mat-error>Card Type is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Mana Cost -->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Mana Cost (e.g., 2WBURG)" formControlName="manaCost">
+        @if (cardForm.controls['manaCost'].hasError('required')) {
+          <mat-error>Mana Cost is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Rarity -->
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Rarity" formControlName="rarity">
+          @for (rarity of rarities; track rarity) {
+            <mat-option [value]="rarity">{{ rarity }}</mat-option>
+          }
+        </mat-select>
+        @if (cardForm.controls['rarity'].hasError('required')) {
+          <mat-error>Rarity is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- URI -->
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Image URI (optional)" formControlName="uri">
+      </mat-form-field>
+
+      <!-- Price -->
+      <mat-form-field class="full-width">
+        <input matInput type="number" placeholder="Price (€)" formControlName="price">
+        @if (cardForm.controls['price'].hasError('required')) {
+          <mat-error>Price is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="cardForm.invalid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

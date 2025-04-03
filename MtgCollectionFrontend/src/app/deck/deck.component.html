@@ -14,10 +14,35 @@
     >
       <div><strong>Total Cards:</strong> {{ deck.numberOfCards }}</div>
       <div><strong>Average Mana Cost:</strong> {{ deck.averageConvertedManaCost }}</div>
-      <div><strong>Total Price:</strong> ${{ deck.totalPrice.toFixed(2) }}</div>
+      <div><strong>Total Price:</strong> {{ deck.totalPrice.toFixed(2) }}€</div>
       <div><strong>Lands:</strong> {{ deck.landCount }}</div>
     </div>
 
+    <form [formGroup]="cardForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field >
+          <mat-select placeholder="Card" formControlName="card">
+            @for (card of cards; track cards) {
+              <mat-option [value]="card.id">{{ card.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button style="
+              padding: 0.5rem 1rem;
+              margin-left: 1rem;
+              font-size: 1rem;
+              margin-bottom: 1.5rem;
+              border: none;
+              background-color: #1976d2;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+                type="submit">Submit</button>
+      </mat-card-actions>
+    </form>
     <button
       (click)="toggleCardsVisibility()"
       style="

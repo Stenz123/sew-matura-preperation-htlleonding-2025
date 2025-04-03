@@ -1,12 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Player} from './player';
 import {EMPTY, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Deck} from './deck';
 import {WebSocketSubject} from 'rxjs/internal/observable/dom/WebSocketSubject';
 import {webSocket} from 'rxjs/webSocket';
-import {Option} from '@angular/cli/src/command-builder/utilities/json-schema';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +46,10 @@ export class DeckService {
       this.decks = this.decks.filter(it => it.id != deck.id)
       this.decks.push(de)
     }
+  }
+
+  addCard(deckId: number, cardId: any) {
+      return this.httpClient.post(`${this.BASE_URL}/card/add/${deckId}/${cardId}`, {})
   }
 
   constructor() {

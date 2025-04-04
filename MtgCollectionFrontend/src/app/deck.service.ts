@@ -49,7 +49,7 @@ export class DeckService {
   }
 
   addCard(deckId: number, cardId: any) {
-      return this.httpClient.post(`${this.BASE_URL}/card/add/${deckId}/${cardId}`, {})
+      return this.httpClient.post(`${this.BASE_URL}/card/add/${cardId}/${deckId}`, {})
   }
 
   constructor() {

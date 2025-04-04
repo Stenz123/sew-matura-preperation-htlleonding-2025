@@ -29,32 +29,14 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button style="
-              padding: 0.5rem 1rem;
-              margin-left: 1rem;
-              font-size: 1rem;
-              margin-bottom: 1.5rem;
-              border: none;
-              background-color: #1976d2;
-              color: white;
-              border-radius: 4px;
-              cursor: pointer;
-            "
+        <button mat-flat-button
+                [disabled]="cardForm.invalid"
                 type="submit">Add</button>
       </mat-card-actions>
     </form>
     <button
       (click)="toggleCardsVisibility()"
-      style="
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-        border: none;
-        background-color: #1976d2;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-      "
+      mat-flat-button
     >
       {{ showCards ? 'Hide Cards' : 'Show Cards' }}
     </button>

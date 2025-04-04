@@ -37,6 +37,13 @@ public class CardResource{
         DeckWebsocket.broadcastDeck(deckRepository.getDeckOverview(deckId));
     }
 
+    @POST
+    @Path("/add/{cardId}/{deckId}")
+    public void adCardToDeck(@PathParam("cardId") int cardId, @PathParam("deckId") int deckId) {
+        deckCardRepository.addCardToDeck(deckId, cardId);
+        DeckWebsocket.broadcastDeck(deckRepository.getDeckOverview(deckId));
+    }
+
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)

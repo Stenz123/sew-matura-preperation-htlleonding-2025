@@ -24,12 +24,14 @@ public class DeckRepository implements PanacheRepository<Deck> {
         int numberOfCards = deckCards.stream().map(DeckCardDto::quantity).mapToInt(Integer::intValue).sum();
         double totalPrice = deckCards.stream().mapToDouble(deckCardDto -> deckCardDto.card().price).sum();
         double averageConvertedManaCost = 0.0;
-        if (numberOfCards != 0) {
-            averageConvertedManaCost = deckCards.stream()
-                    .mapToDouble(deckCard -> deckCard.card().convertedManaCost * deckCard.quantity())
-                    .sum() / (double) numberOfCards;
-        }
         int landCount = (int) deckCards.stream().filter(deckCardDto -> deckCardDto.card().type == CardType.LAND).mapToDouble(DeckCardDto::quantity).sum();
+        long numberOfNonlands = numberOfCards - landCount;
+        if (numberOfNonlands != 0) {
+            averageConvertedManaCost = deckCards.stream()
+                    .filter(deckCardDto -> deckCardDto.card().type != CardType.LAND)
+                    .mapToDouble(deckCard -> deckCard.card().convertedManaCost * deckCard.quantity())
+                    .sum() / (double) numberOfNonlands;
+        }
 
         return new DeckDto(
                 deck.id.intValue(),
